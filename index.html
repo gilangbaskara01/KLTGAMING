@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KLT GAMING</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#ececec;
+    padding:10px;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    border:3px solid #000;
+    background:white;
+}
+
+/* HEADER */
+
+.header{
+    background:#0033cc;
+    color:white;
+    text-align:center;
+    font-size:clamp(32px,5vw,60px);
+    font-weight:bold;
+    padding:15px;
+}
+
+/* LOGIN */
+
+.login-box{
+    display:flex;
+    gap:3px;
+    background:#0033cc;
+    padding:3px;
+}
+
+#siteSelect{
+    flex:1;
+    height:55px;
+    border:none;
+    padding:0 15px;
+    background:#0033cc;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.login-btn{
+    width:130px;
+    border:none;
+    background:#00ff00;
+    font-size:24px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.login-btn:hover{
+    background:#00cc00;
+}
+
+/* GRID */
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+}
+
+.card{
+    border:1px solid #000;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:scale(1.02);
+    box-shadow:0 0 15px rgba(0,0,0,0.3);
+}
+
+/* RTP */
+
+.rtp{
+    padding:6px;
+    text-align:center;
+    font-weight:bold;
+    font-size:18px;
+    color:#000;
+}
+
+.bar{
+    width:100%;
+    height:10px;
+    background:#ddd;
+}
+
+.fill{
+    height:100%;
+    width:0%;
+    transition:1s;
+}
+
+/* NAMA SITUS */
+
+.site-name{
+    background:#efefef;
+    text-align:center;
+    font-size:clamp(22px,4vw,44px);
+    padding:35px 5px;
+    font-weight:bold;
+}
+
+@media(max-width:600px){
+
+    .login-btn{
+        width:90px;
+        font-size:18px;
+    }
+
+    #siteSelect{
+        font-size:14px;
+    }
+
+    .site-name{
+        font-size:20px;
+        padding:25px 5px;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        KLT GAMING
+    </div>
+
+    <div class="login-box">
+
+        <select id="siteSelect">
+
+            <option value="">PILIH SITUS</option>
+
+            <option value="https://sikilat77.vip">KILAT77</option>
+            <option value="https://barbar77.com">BARBAR77</option>
+            <option value="https://permen138.com">PERMEN138</option>
+            <option value="https://rp77.com">RP77</option>
+            <option value="https://uang69.com">UANG69</option>
+            <option value="https://bejo69.com">BEJO69</option>
+            <option value="https://brutal77.com">BRUTAL77</option>
+            <option value="https://jos77.com">JOS77</option>
+
+        </select>
+
+        <button class="login-btn" onclick="loginSite()">
+            LOGIN
+        </button>
+
+    </div>
+
+    <div class="grid" id="siteGrid"></div>
+
+</div>
+
+<script>
+
+const sites = [
+
+{
+    name:"KILAT77",
+    link:"https://sikilat77.vip"
+},
+{
+    name:"BARBAR77",
+    link:"https://barbar77.com"
+},
+{
+    name:"PERMEN138",
+    link:"https://permen138.com"
+},
+{
+    name:"RP77",
+    link:"https://rp77.com"
+},
+{
+    name:"UANG69",
+    link:"https://uang69.com"
+},
+{
+    name:"BEJO69",
+    link:"https://bejo69.com"
+},
+{
+    name:"BRUTAL77",
+    link:"https://brutal77.com"
+},
+{
+    name:"JOS77",
+    link:"https://jos77.com"
+}
+
+];
+
+const grid = document.getElementById('siteGrid');
+
+sites.forEach(site=>{
+
+    grid.innerHTML += `
+    
+    <div class="card" onclick="goSite('${site.link}')">
+
+        <div class="rtp">
+            🔥 RTP <span class="rtp-value">98</span>%
+        </div>
+
+        <div class="bar">
+            <div class="fill"></div>
+        </div>
+
+        <div class="site-name">
+            ${site.name}
+        </div>
+
+    </div>
+
+    `;
+});
+
+function loginSite(){
+
+    const link = document.getElementById('siteSelect').value;
+
+    if(link === ''){
+
+        alert('Pilih situs terlebih dahulu');
+        return;
+
+    }
+
+    window.location.href = link;
+}
+
+function goSite(link){
+
+    window.location.href = link;
+}
+
+function updateRTP(){
+
+    document.querySelectorAll('.card').forEach(card=>{
+
+        let rtp = Math.floor(Math.random()*11)+90;
+
+        let text = card.querySelector('.rtp');
+        let fill = card.querySelector('.fill');
+
+        if(rtp >= 98){
+
+            text.style.background='#00ff00';
+            fill.style.background='#00ff00';
+            text.innerHTML=`🔥 RTP ${rtp}%`;
+
+        }
+        else if(rtp >=95){
+
+            text.style.background='#ffff00';
+            fill.style.background='#ffff00';
+            text.innerHTML=`⭐ RTP ${rtp}%`;
+
+        }
+        else{
+
+            text.style.background='#ff9900';
+            fill.style.background='#ff9900';
+            text.innerHTML=`🎯 RTP ${rtp}%`;
+
+        }
+
+        fill.style.width = rtp + '%';
+
+    });
+
+}
+
+updateRTP();
+
+setInterval(updateRTP,2000);
+
+</script>
+
+</body>
+</html>
